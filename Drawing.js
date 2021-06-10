@@ -1,0 +1,5 @@
+const Drawing = {};
+
+Drawing.show = () => {
+    
+}
