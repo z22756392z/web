@@ -7,7 +7,7 @@ Home.html = `
 <a href = "javascript:pictureWall.show()">My dog</a>
 </div>
 <div class = "content-preview">
-<a href = "javascript:drawing.show()">Drawing</a>
+<a href = "javascript:GameScreen.show()">My game</a>
 </div>
 <div class = "content-preview">
 <a href = "javascript:commentDetail.show()">Discuss</a>
