@@ -1,7 +1,9 @@
-fatalError = (message) => {
-    alert(message);
+const error = {};
+
+error.fatalError = (message) => {
+    main.innerHTML = `<p>`+message+`</p>`;
 }
 
-message = (message) => {
+error.message = (message) => {
     console.log(message);
 }

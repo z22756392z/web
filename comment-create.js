@@ -32,16 +32,6 @@ commentBoard.html = `
 </div>
 `
 
-
-const symbol = " "
-commentBoard.value = [];
-
-commentBoard.value[0] = {
-    Title: "Hello",
-    Body: `You can leave a comment here click on the right-top \" Comment \".\nWatch out! It would be gone once the page is refreshed!`,
-    Author: "Brian"
-};
-
 commentBoard.show = () => {
     main.innerHTML = commentBoard.html;
 }
@@ -51,14 +41,16 @@ handleButton = () => {
        document.getElementById("Body-text").value   == ""  ||
        document.getElementById("Author-text").value == "" )  return message("Please fill the form");
     
-    commentBoard.value[commentBoard.value.length] = {
+    let index = commentBoard.value.length;
+    commentData[index] = {
         Title : "",
         Body : "",
-        Author : ""
+        Author : "",
+        Id: index
     }
-    commentBoard.value[commentBoard.value.length -1].Title = document.getElementById("Title-text").value;
-    commentBoard.value[commentBoard.value.length -1].Body = document.getElementById("Body-text").value;
-    commentBoard.value[commentBoard.value.length -1].Author = document.getElementById("Author-text").value;
+    commentData[index].Title = document.getElementById("Title-text").value;
+    commentData[index].Body = document.getElementById("Body-text").value;
+    commentData[index].Author = document.getElementById("Author-text").value;
 
     Home.show();
 }

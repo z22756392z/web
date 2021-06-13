@@ -1,4 +1,3 @@
-
 const commentDetail = {};
 
 commentDetail.html = `
@@ -14,6 +13,8 @@ commentDetail.html = `
 </template>
 `;
 
+
+
 commentDetail.show = () => {
     main.innerHTML = commentDetail.html;
 
@@ -22,24 +23,21 @@ commentDetail.show = () => {
     const template = document.getElementById("template");
 
     const clone = [];
-    for(let i = 0 ; i < commentBoard.value.length ;i ++){
+    for(let i = 0 ; i < commentData.length ;i ++){
         clone[i] = template.content.cloneNode(true);
         
         var h3 = clone[i].querySelectorAll("h3");
-        h3[0].textContent = "Title: " + commentBoard.value[i].Title;
-        h3[1].textContent = "Author:    " + commentBoard.value[i].Author;
+        h3[0].textContent = "Title: " + commentData[i].Title;
+        h3[1].textContent = "Author:    " + commentData[i].Author;
         var p = clone[i].querySelector("p");
-        p.textContent = "" + commentBoard.value[i].Body;
+        p.textContent = "" + commentData[i].Body;
         
-
-        //clone[i] = template.content.firstElementChild.cloneNode(true);  //prevent document fragment
         container.appendChild(clone[i]);
         
     }
 }else{
     console.log("failed to use template element");
-}
-    
+  }
 }
 
 

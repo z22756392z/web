@@ -12,17 +12,11 @@ Home.html = `
 <div class = "content-preview">
 <a href = "javascript:commentDetail.show()">Discuss</a>
 </div>
-
 `
-const main = document.querySelector('main');
 
 Home.show = () => {
     main.innerHTML = Home.html;
 }
 
-function init(){
-    navbar.show();
-    Home.show();
-}
 
 

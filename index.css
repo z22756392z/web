@@ -11,7 +11,7 @@
   padding: 20px;
   display: flex;
   align-items: center;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
 }
@@ -54,7 +54,7 @@ main {
 }
 
 #comment-create {
-  max-width: 400px;
+  max-width: 600px;
   margin: 0 auto;
   text-align: center;
 }
@@ -85,7 +85,7 @@ main {
 }
 
 #container  .comment{
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
