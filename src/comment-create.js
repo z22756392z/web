@@ -41,7 +41,7 @@ handleButton = () => {
        document.getElementById("Body-text").value   == ""  ||
        document.getElementById("Author-text").value == "" )  return message("Please fill the form");
     
-    let index = commentBoard.value.length;
+    let index = commentData.length;
     commentData[index] = {
         Title : "",
         Body : "",
