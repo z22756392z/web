@@ -7,7 +7,7 @@
     color: #333;
 }
 
-#navbar {
+#Navbar {
   padding: 20px;
   display: flex;
   align-items: center;
@@ -15,26 +15,32 @@
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
 }
-#navbar h1 {
+#Navbar h1 {
   color: #f1356d;
+  margin-right: 50px;
+  margin-left: 100px;
 }
-#navbar .links {
+#Navbar .links {
   margin-left: auto;
 }
-#navbar a {
+#Navbar a {
   margin-left: 20px;
   text-decoration: none;
   padding: 6px;
 }
-#navbar a:hover {
+#Navbar a:hover {
     color: #f1356d;
 }
 main {
   max-width: 600px;
-  margin: 40px auto;
+  margin: 5px auto;
   padding: 20px;
 }
 
+
+#content-list{
+  margin: 15px auto;
+}
 
 .content-preview {
   padding: 10px 16px;
@@ -99,4 +105,32 @@ main {
   width: 250px;
   height:400px;
   padding: 20px;
+}
+
+
+/*Drawing*/
+
+#Panel .panel-list, #setting-panel .panel-list{
+  padding: 10px 50px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+  display: table-cell;
+}
+
+#Panel a,#setting-panel a{
+  text-decoration: none;
+}
+
+#Panel .panel-list:hover, #setting-panel .panel-list:hover{
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+}
+
+#setting-panel{
+  top: 100px;
+  left:0px;
+  right:0px;
+  bottom: 0px;
+  width: 600px;
+  height: 50px;
+  margin: auto;
 }

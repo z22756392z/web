@@ -2,7 +2,7 @@ const GameScreen = {};
 
 GameScreen.html = `
 <canvas 
-    tabindex='1'
+    tabindex='-1'
 	style = 
 	"
 	padding: 0;
@@ -25,7 +25,7 @@ GameScreen.html = `
     <img id = "img_knight" src = "src/game/assets/images/knight.png" style = "display: none"></img>
     <p>use capital W,A,S,D to move and use J to defense yourself</p>
 `
-let lastTime = 0;
+GameScreen.lastTime = 0;
 
 GameScreen.show = () => {
     main.innerHTML = GameScreen.html
@@ -43,9 +43,9 @@ GameScreen.show = () => {
 }
 
 GameScreen.gameLoop = (timeStamp) => {
-    let deltaTime = timeStamp - lastTime;
+    let deltaTime = timeStamp - GameScreen.lastTime;
   
-    lastTime = timeStamp;
+    GameScreen.lastTime = timeStamp;
   
     GameScreen.ctx.clearRect(0, 0, GameScreen.GAME_WIDTH, GameScreen.GAME_HEIGHT);
   
