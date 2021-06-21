@@ -1,17 +1,21 @@
 class Input {
-    constructor(pen){
+    constructor(Object){
         Drawing.Canvas.addEventListener("mousemove", (event) => {
-            pen.penDown(getMousePosition(Drawing.Canvas,event));
-        })
+            Object.forEach((Object) => {if(Object.selected){
+                Object.Down(getMousePosition(Drawing.Canvas,event));}}
+            );
+        });
 
         Drawing.Canvas.addEventListener("mousedown", () =>{
-            pen.isMouseDown = true;
-        })
+            Object.forEach((Object) => {if(Object.selected){
+            Object.isMouseDown = true;}})
+        });
 
 
         Drawing.Canvas.addEventListener("mouseup", () =>{
-            pen.isMouseDown = false;
-        })
+            Object.forEach((Object) => {if(Object.selected){
+                Object.isMouseDown = false;}})
+            });
 
         
     }

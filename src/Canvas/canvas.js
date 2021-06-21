@@ -1,23 +1,29 @@
 class Canvas{
     constructor(canvasWidth, canvasHeight){
         
-        this.canvasWidth = canvasHeight;
+        this.canvasWidth = canvasWidth;
         this.gameHeight = canvasHeight;
         
         this.pen = new Pen()
-        new Input(this.pen);
+        this.eraser = new Eraser();
+        
 
-        this.gameObject = [];
+        this.Object = [];
+        this.Object = [this.pen, this.eraser];
 
-        this.gameObject = [this.pen];
+        new Input(this.Object);
     }
 
     update(deltaTime) {
         if(!deltaTime) return;
-        this.gameObject.forEach((Object) => {Object.update()}) 
+        this.Object.forEach((Object) => {if(Object.selected){
+            Object.update();
+        }})
     }
 
     draw(ctx) {
-        this.gameObject.forEach((Object) =>{Object.draw(ctx)});
+        this.Object.forEach((Object) =>{if(Object.selected){
+            Object.draw(ctx);
+        }})
     }
 }
