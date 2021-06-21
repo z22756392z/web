@@ -6,9 +6,9 @@ class Input {
             );
         });
 
-        Drawing.Canvas.addEventListener("mousedown", () =>{
+        Drawing.Canvas.addEventListener("mousedown", (event) =>{
             Object.forEach((Object) => {if(Object.selected){
-            Object.isMouseDown = true;}})
+            Object.isMouseDown = true; Object.onMouseDown(getMousePosition(Drawing.Canvas,event));}})
         });
 
 

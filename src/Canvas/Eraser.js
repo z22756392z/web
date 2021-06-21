@@ -1,6 +1,10 @@
 class Eraser{
     constructor(){
         this.isMouseDown = false;
+        this.onMouseDown = (coord) =>{
+            this.x = coord.x;
+            this.y = coord.y;
+        }
         this.x = null;
         this.y = null;
         this.width = 10;
@@ -14,14 +18,16 @@ class Eraser{
     }
 
     update(){
-        this.width = Drawing.canvas.objectWidth;
-        this.height = Drawing.canvas.objectHeight;
+        if(Drawing.canvas.objectWidth != null){
+            this.width = Drawing.canvas.objectWidth;
+            this.height = Drawing.canvas.objectHeight;
+        }
     }
 
     draw(ctx){
         if(this.isMouseDown){
             ctx.fillStyle='white';
-            ctx.fillRect(this.x,this.y,this.width,this.height);
+            ctx.fillRect(this.x - this.width / 2,this.y - this.height/2,this.width,this.height);
             ctx.fill();
         }
        

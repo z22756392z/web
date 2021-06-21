@@ -47,8 +47,8 @@ Drawing.onBucketSelect = () =>{
 
 Drawing.onEraserSelect = () =>{
 	Drawing.selectObject = "Eraser"
-	Drawing.canvas.eraser.selected = true;
 	Drawing.canvas.pen.selected = false;
+	Drawing.canvas.eraser.selected = true;
 	Drawing.settingPanelShow();
 	Drawing.detailSettingPanel.innerHTML = ``;
 }
@@ -60,16 +60,26 @@ Drawing.settingPanelHtml = `
 <a href = javascript:Drawing.sizeSettingShow()>Size</a></div>
 <div class = "panel-list">
 <a href = javascript:Drawing.colorSettingShow()>Color Picker</a></div>
+<div class = "panel-list">
+<a href = javascript:Drawing.shapeSettingShow()>Shape</a></div>
+<div class ="canvas">
+<canvas width = "50" height = "50"></canvas></div>
+
 `
 Drawing.settingPanelShow = () =>{
 	Drawing.settingPanel.innerHTML = Drawing.settingPanelHtml;
+	
+	Drawing.DisplayCanvas = Drawing.settingPanel.querySelector("canvas");
+	Drawing.DisplayerCtx = Drawing.DisplayCanvas.getContext("2d");
+	//display original size
+	Drawing.DisplayerCtx.fillRect(0,35-5/2,5,5);
+	Drawing.DisplayerCtx.fill();
 }
 
 
 Drawing.sizeSettingHtml = `
 <p>Size slider:</p>
 <input type="range" min="1" max="30" value="5" id = "sizeInput">
-<canvas width = "50" height = "50"></canvas>
 `
 Drawing.sizeSettingShow = () =>{
 	Drawing.detailSettingPanel.innerHTML = Drawing.sizeSettingHtml;
@@ -77,25 +87,45 @@ Drawing.sizeSettingShow = () =>{
 	p.textContent = Drawing.selectObject + " " + p.textContent;
 	
 	Drawing.sizeInput = document.getElementById("sizeInput");
+	Drawing.sizeInput.value = 5;
+	Drawing.canvas.objectWidth = 5;
+	Drawing.canvas.objectHeight = 5;
 	Drawing.sizeInput.onchange = Drawing.sizeInputHandler;
-	
-
-	Drawing.sizeInputDisplayCanvas = Drawing.detailSettingPanel.querySelector("canvas");
-	Drawing.sizeInputDisplayerCtx = Drawing.sizeInputDisplayCanvas.getContext("2d");
-	//display original size
-	Drawing.sizeInputDisplayerCtx.fillRect(20,0,5,5);
-	Drawing.sizeInputDisplayerCtx.fill();
-	Drawing.sizeInput.onmouseover = Drawing.sizeInputDisplayer;
 	
 }
 Drawing.sizeInputHandler = () => {
 	Drawing.canvas.objectWidth = Drawing.sizeInput.value;
     Drawing.canvas.objectHeight = Drawing.sizeInput.value;
-	Drawing.sizeInputDisplayerCtx.clearRect(0, 0, 50, 50);
-	Drawing.sizeInputDisplayerCtx.fillRect(20,0,Drawing.canvas.objectWidth,Drawing.canvas.objectHeight);
-	Drawing.sizeInputDisplayerCtx.fill();
+	Drawing.DisplayerCtx.clearRect(0, 0, 50, 50);
+	Drawing.DisplayerCtx.fillRect(0,35-Drawing.canvas.objectWidth/2 ,Drawing.canvas.objectWidth,Drawing.canvas.objectHeight);
+	Drawing.DisplayerCtx.fill();
 }
 
+Drawing.shapeSettingHtml = `
+<div class = "panel-list">
+<a href = javascript:Drawing.onDefaultSelected()>Pen</a></div>
+<div class = "panel-list">
+<a href = javascript:Drawing.onLineSelected()>Line</a></div>
+<div class = "panel-list">
+<a href = javascript:Drawing.onRectangleSelected()>Rectangle</a></div>
+<div class = "panel-list">
+<a href = javascript:Drawing.onCircleSelected()>Circle</a></div>
+`
+Drawing.shapeSettingShow = () => {
+	Drawing.detailSettingPanel.innerHTML = Drawing.shapeSettingHtml;
+}
+Drawing.onDefaultSelected = () =>{
+	Drawing.canvas.pen.shape = "Pen";
+}
+Drawing.onLineSelected = () =>{
+	Drawing.canvas.pen.shape = "Line";
+}
+Drawing.onRectangleSelected = () =>{
+	Drawing.canvas.pen.shape = "Rectangle";
+}
+Drawing.onCircleSelected = () =>{
+	Drawing.canvas.pen.shape = "Circle";
+}
 
 Drawing.colorSettingHtml = `
 <p>Default range slider:</p>
