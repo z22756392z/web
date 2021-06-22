@@ -28,6 +28,8 @@ Drawing.panelHtml = `
 <a href = javascript:Drawing.onBucketSelect()>Bucket</a></div>
 <div class = "panel-list">
 <a href = javascript:Drawing.onEraserSelect()>Eraser</a></div>
+<div class = "panel-list">
+<a href = javascript:Drawing.onSelectSelect()>Select</a></div>
 `
 
 Drawing.selectObject = "Pen";
@@ -35,6 +37,7 @@ Drawing.selectObject = "Pen";
 Drawing.onPenSelected = () =>{
 	Drawing.selectObject = "Pen"
 	Drawing.canvas.pen.selected = true;
+	Drawing.canvas.select.selected = false;
 	Drawing.canvas.eraser.selected = false;
 	Drawing.settingPanelShow();
 	Drawing.detailSettingPanel.innerHTML = ``;
@@ -44,13 +47,23 @@ Drawing.onBucketSelect = () =>{
 	Drawing.settingPanel.innerHTML = ``;
 	Drawing.detailSettingPanel.innerHTML = ``;
 }
-
 Drawing.onEraserSelect = () =>{
 	Drawing.selectObject = "Eraser"
 	Drawing.canvas.pen.selected = false;
+	Drawing.canvas.select.selected = false;
 	Drawing.canvas.eraser.selected = true;
 	Drawing.settingPanelShow();
 	Drawing.detailSettingPanel.innerHTML = ``;
+}
+Drawing.onSelectSelect = () =>{
+	Drawing.selectObject = "Select"
+	Drawing.canvas.pen.selected = false;
+	Drawing.canvas.eraser.selected = false;
+	Drawing.canvas.select.selected = true;
+	Drawing.canvas.select.init();
+	Drawing.settingPanelShow();
+	Drawing.detailSettingPanel.innerHTML = ``;
+	Drawing.settingPanel.innerHTML = ``;
 }
 
 
@@ -78,8 +91,9 @@ Drawing.settingPanelShow = () =>{
 
 
 Drawing.sizeSettingHtml = `
+<div class = "sizeSetting">
 <p>Size slider:</p>
-<input type="range" min="1" max="30" value="5" id = "sizeInput">
+<input type="range" min="1" max="30" value="5" id = "sizeInput"></div>
 `
 Drawing.sizeSettingShow = () =>{
 	Drawing.detailSettingPanel.innerHTML = Drawing.sizeSettingHtml;
@@ -102,6 +116,7 @@ Drawing.sizeInputHandler = () => {
 }
 
 Drawing.shapeSettingHtml = `
+<div class = "Panel">
 <div class = "panel-list">
 <a href = javascript:Drawing.onDefaultSelected()>Pen</a></div>
 <div class = "panel-list">
@@ -110,21 +125,47 @@ Drawing.shapeSettingHtml = `
 <a href = javascript:Drawing.onRectangleSelected()>Rectangle</a></div>
 <div class = "panel-list">
 <a href = javascript:Drawing.onCircleSelected()>Circle</a></div>
+</div>
+
+<div  class = "Panel">
+<div class = "panel-list"  style = "display : none">
+<a href = javascript:Drawing.onSoildSelected()>Soild</a></div>
+<div class = "panel-list" style = "display : none">
+<a href = javascript:Drawing.onHollowSelected()>Hollow</a></div>
+</div>
 `
 Drawing.shapeSettingShow = () => {
 	Drawing.detailSettingPanel.innerHTML = Drawing.shapeSettingHtml;
 }
 Drawing.onDefaultSelected = () =>{
 	Drawing.canvas.pen.shape = "Pen";
+	var div = Drawing.detailSettingPanel.querySelectorAll("div");
+	div[6].style.display = "none";
+	div[7].style.display = "none" 
 }
 Drawing.onLineSelected = () =>{
 	Drawing.canvas.pen.shape = "Line";
+	var div = Drawing.detailSettingPanel.querySelectorAll("div");
+	div[6].style.display = "none";
+	div[7].style.display = "none" 
 }
 Drawing.onRectangleSelected = () =>{
 	Drawing.canvas.pen.shape = "Rectangle";
+	var div = Drawing.detailSettingPanel.querySelectorAll("div");
+	div[6].style.display = "inline";
+	div[7].style.display = "inline" 
 }
 Drawing.onCircleSelected = () =>{
 	Drawing.canvas.pen.shape = "Circle";
+	var div = Drawing.detailSettingPanel.querySelectorAll("div");
+	div[6].style.display = "inline";
+	div[7].style.display = "inline" 
+}
+Drawing.onHollowSelected = () =>{
+	Drawing.canvas.objectType = "hollow"
+} 
+Drawing.onSoildSelected = () =>{
+	Drawing.canvas.objectType = "soild"
 }
 
 Drawing.colorSettingHtml = `

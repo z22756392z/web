@@ -5,6 +5,7 @@ class Eraser{
             this.x = coord.x;
             this.y = coord.y;
         }
+        this.onMouseUp = (coord) =>{};
         this.x = null;
         this.y = null;
         this.width = 10;

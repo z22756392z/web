@@ -112,7 +112,7 @@ main {
 
 #Panel .panel-list, #setting-panel .panel-list, #detail-setting-panel .panel-list{
   min-height: 10px;
-  padding: 10px 50px;
+  padding: 8px 50px;
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
   display: inline;
@@ -126,26 +126,16 @@ main {
   box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
 }
 
-#setting-panel{
-  top: 100px;
-  left:0px;
-  right:0px;
-  bottom: 0px;
+#setting-panel, #detail-setting-panel .Panel{
   width: 600px;
   height: 50px;
-  margin: auto;
   display: flex;
 }
 
-#detail-setting-panel{
+#detail-setting-panel .sizeSetting{
   padding: 20px;
-  margin: auto;
-  display: flex;
 }
 
 #Panel{
   display: block;
-}
-
-.canvas{  
 }

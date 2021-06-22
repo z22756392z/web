@@ -6,10 +6,12 @@ class Pen{
             this.y = coord.y;
             this.preX = this.x;
             this.preY = this.y;
-            if(this.shape == "Line"){
+            this.type = "soild";
+            if(this.shape == "Line" || this.shape == "Rectangle" || this.shape == "Circle"){
                 Drawing.dataURL = Drawing.Canvas.toDataURL();
             }
         };
+        this.onMouseUp = (coord) =>{};
         this.x = null;
         this.y = null;
         this.preX = null;
@@ -30,7 +32,9 @@ class Pen{
             this.width = Drawing.canvas.objectWidth;
             this.height = Drawing.canvas.objectHeight;
         }
-        
+        if(Drawing.canvas.objectType != null){
+            this.type = Drawing.canvas.objectType;
+        }
     }
 
     draw(ctx){
@@ -58,15 +62,32 @@ class Pen{
                 ctx.stroke();
             }
             else if(this.shape == "Rectangle"){
+                ctx.clearRect(0,0,600,400);
+                var image = new Image
+                image.src = Drawing.dataURL;
+                ctx.drawImage(image,0,0);
                 ctx.fillStyle='black';
-                ctx.fillRect(this.x - this.width/2,this.y - this.height/2,this.width,this.height);
-                ctx.fill();
+                ctx.beginPath();
+                ctx.lineWidth = this.width;
+                ctx.moveTo(this.preX,this.preY);
+                ctx.lineTo(this.x, this.preY);
+                ctx.lineTo(this.x, this.y);
+                ctx.lineTo(this.preX, this.y);
+                ctx.lineTo(this.preX,this.preY);
+                if(this.type == "soild")    ctx.fill();
+                else    ctx.stroke();
+                
             }
             else if(this.shape == "Circle"){
+                ctx.clearRect(0,0,600,400);
+                var image = new Image
+                image.src = Drawing.dataURL;
+                ctx.drawImage(image,0,0);
                 ctx.fillStyle='black';
                 ctx.beginPath();
                 ctx.arc(this.x,this.y,this.width,0,2* Math.PI);
-                ctx.fill();
+                if(this.type == "soild")    ctx.fill();
+                else    ctx.stroke();
             }
         }
        

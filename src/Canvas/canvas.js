@@ -6,10 +6,10 @@ class Canvas{
         
         this.pen = new Pen()
         this.eraser = new Eraser();
-        
+        this.select = new Select();
 
         this.Object = [];
-        this.Object = [this.pen, this.eraser];
+        this.Object = [this.pen, this.eraser,this.select];
 
         new Input(this.Object);
     }
