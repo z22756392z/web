@@ -1,23 +1,13 @@
 class Select{
-    constructor(){
-        this.isMouseDown = false;
-        this.selectedFinish = false;
-        Drawing.selectBoxdataURL = [];
-        this.selectedBox = {
-            x: null,
-            y: null,
-            width: null,
-            height: null,
-            image: null,
-        }
-        
+    constructor(canvas){
+        this.canvas = canvas;
         this.onMouseDown = (coord) =>{
             this.x = coord.x;
             this.y = coord.y;
             this.preX = this.x;
             this.preY = this.y;
             if(!this.selectedFinish){
-                Drawing.selectBoxdataURL[0] = Drawing.Canvas.toDataURL(); 
+                Drawing.selectBoxdataURL = Drawing.Canvas.toDataURL(); 
             }
         }
         this.onMouseUp = (coord) =>{
@@ -35,8 +25,8 @@ class Select{
                 this.selectedFinish = false;
             }
         }
-        this.x = null;
-        this.y = null;
+
+        this.init();
         this.selected = false;
     }
 
@@ -54,6 +44,7 @@ class Select{
         }
         this.isMouseDown = false;
         this.selectedFinish = false;
+        this.selectBoxIsdrag = false;
     }
 
     Down(coord){
@@ -62,15 +53,27 @@ class Select{
     }
 
     update(){
+        if( this.isMouseDown &&
+            this.selectedFinish && 
+            this.x >= this.selectedBox.x &&
+            this.y >= this.selectedBox.y &&
+            this.x <= this.selectedBox.x + this.selectedBox.width&&
+            this.y <= this.selectedBox.y + this.selectedBox.height&&
+            !this.selectBoxIsdrag)
+        {
+            this.selectBoxIsdrag = true;
+        }
     }
 
     draw(ctx){
-        if(this.isMouseDown && !this.selectedFinish){
+        if(!this.isMouseDown) return;
+
+        if( !this.selectedFinish){
             ctx.clearRect(0,0,600,400);
             var image = new Image
-            image.src = Drawing.selectBoxdataURL[0];
+            image.src = Drawing.selectBoxdataURL;
             ctx.drawImage(image,0,0);
-            ctx.fillStyle='bule';
+            ctx.fillStyle = "#00ff"
             ctx.beginPath();
             ctx.lineWidth = 1;
             ctx.moveTo(this.preX,this.preY);
@@ -80,10 +83,10 @@ class Select{
             ctx.lineTo(this.preX,this.preY);
             ctx.stroke();
         }
-        if(this.isMouseDown && this.selectBoxIsdrag){
+        if(this.selectBoxIsdrag){
             ctx.clearRect(0,0,600,400);
             var image = new Image
-            image.src = Drawing.selectBoxdataURL[0];
+            image.src = Drawing.selectBoxdataURL;
             ctx.drawImage(image,0,0);
             image.src = this.selectedBox.image
             ctx.drawImage(
@@ -97,16 +100,6 @@ class Select{
                         this.selectedBox.width - 2 ,
                         this.selectedBox.height - 2
             );
-        }
-        else if( this.isMouseDown &&
-            this.selectedFinish && 
-            this.x >= this.selectedBox.x &&
-            this.y >= this.selectedBox.y &&
-            this.x <= this.selectedBox.x + this.selectedBox.width&&
-            this.y <= this.selectedBox.y + this.selectedBox.height&&
-            !this.selectBoxIsdrag)
-        {
-            this.selectBoxIsdrag = true;
         }
     }
 }

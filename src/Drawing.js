@@ -39,18 +39,24 @@ Drawing.onPenSelected = () =>{
 	Drawing.canvas.pen.selected = true;
 	Drawing.canvas.select.selected = false;
 	Drawing.canvas.eraser.selected = false;
+	Drawing.canvas.bucket.selected = false;
 	Drawing.settingPanelShow();
 	Drawing.detailSettingPanel.innerHTML = ``;
 }
 Drawing.onBucketSelect = () =>{
 	Drawing.selectObject = "Bucket";
-	Drawing.settingPanel.innerHTML = ``;
+	Drawing.canvas.pen.selected = false;
+	Drawing.canvas.select.selected = false;
+	Drawing.canvas.eraser.selected = false;
+	Drawing.canvas.bucket.selected = true;
+	Drawing.settingPanelShow();
 	Drawing.detailSettingPanel.innerHTML = ``;
 }
 Drawing.onEraserSelect = () =>{
 	Drawing.selectObject = "Eraser"
 	Drawing.canvas.pen.selected = false;
 	Drawing.canvas.select.selected = false;
+	Drawing.canvas.bucket.selected = false;
 	Drawing.canvas.eraser.selected = true;
 	Drawing.settingPanelShow();
 	Drawing.detailSettingPanel.innerHTML = ``;
@@ -59,6 +65,7 @@ Drawing.onSelectSelect = () =>{
 	Drawing.selectObject = "Select"
 	Drawing.canvas.pen.selected = false;
 	Drawing.canvas.eraser.selected = false;
+	Drawing.canvas.bucket.selected = false;
 	Drawing.canvas.select.selected = true;
 	Drawing.canvas.select.init();
 	Drawing.settingPanelShow();
@@ -101,9 +108,12 @@ Drawing.sizeSettingShow = () =>{
 	p.textContent = Drawing.selectObject + " " + p.textContent;
 	
 	Drawing.sizeInput = document.getElementById("sizeInput");
-	Drawing.sizeInput.value = 5;
-	Drawing.canvas.objectWidth = 5;
-	Drawing.canvas.objectHeight = 5;
+	
+	if( Drawing.canvas.objectWidth!= null){
+		Drawing.sizeInput.value = Drawing.canvas.objectWidth;
+		Drawing.canvas.objectHeight =Drawing.canvas.objectHeight;
+	}
+	
 	Drawing.sizeInput.onchange = Drawing.sizeInputHandler;
 	
 }
@@ -111,6 +121,48 @@ Drawing.sizeInputHandler = () => {
 	Drawing.canvas.objectWidth = Drawing.sizeInput.value;
     Drawing.canvas.objectHeight = Drawing.sizeInput.value;
 	Drawing.DisplayerCtx.clearRect(0, 0, 50, 50);
+	Drawing.DisplayerCtx.fillRect(0,35-Drawing.canvas.objectWidth/2 ,Drawing.canvas.objectWidth,Drawing.canvas.objectHeight);
+	Drawing.DisplayerCtx.fill();
+}
+
+
+Drawing.colorSettingHtml = `
+<p>Red slider:</p>
+<input type="range" min="0" max="255" value="0" id = "r-slider">
+<p>Green slider:</p>
+<input type="range" min="0" max="255" value="0" id = "g-slider">
+<p>Bule slider:</p>
+<input type="range" min="0" max="255" value="0" id = "b-slider">
+<p>Alpha slider:</p>
+<input type="range" min="0" max="255" value="255" id = "a-slider">
+`;
+Drawing.colorSettingShow = () =>{
+	Drawing.detailSettingPanel.innerHTML = Drawing.colorSettingHtml;
+	Drawing.rSlider = document.getElementById("r-slider");
+	Drawing.gSlider = document.getElementById("g-slider");
+	Drawing.bSlider = document.getElementById("b-slider");
+	Drawing.aSlider = document.getElementById("a-slider");
+
+	if(Drawing.canvas.objectColorR != null){
+		Drawing.rSlider.value = Drawing.canvas.objectColorR
+		Drawing.gSlider.value = Drawing.canvas.objectColorG
+		Drawing.bSlider.value = Drawing.canvas.objectColorB
+		Drawing.aSlider.value = Drawing.canvas.objectColorA
+	}
+	
+	
+	Drawing.rSlider.onchange = Drawing.colorInputOnChange;
+	Drawing.gSlider.onchange = Drawing.colorInputOnChange;
+	Drawing.bSlider.onchange = Drawing.colorInputOnChange;
+	Drawing.aSlider.onchange = Drawing.colorInputOnChange;
+}
+Drawing.colorInputOnChange = () =>{
+	Drawing.canvas.objectColorR = Drawing.rSlider.value;
+	Drawing.canvas.objectColorG = Drawing.gSlider.value;
+	Drawing.canvas.objectColorB = Drawing.bSlider.value;
+	Drawing.canvas.objectColorA = Drawing.aSlider.value;
+	Drawing.DisplayerCtx.clearRect(0, 0, 50, 50);
+	Drawing.DisplayerCtx.fillStyle = "rgba(" + Drawing.canvas.objectColorR +","+Drawing.canvas.objectColorG+ ","+Drawing.canvas.objectColorB + ","+Drawing.canvas.objectColorA +")";
 	Drawing.DisplayerCtx.fillRect(0,35-Drawing.canvas.objectWidth/2 ,Drawing.canvas.objectWidth,Drawing.canvas.objectHeight);
 	Drawing.DisplayerCtx.fill();
 }
@@ -168,12 +220,6 @@ Drawing.onSoildSelected = () =>{
 	Drawing.canvas.objectType = "soild"
 }
 
-Drawing.colorSettingHtml = `
-<p>Default range slider:</p>
-<input type="range" min="1" max="30" value="5">
-`;
-
-
 Drawing.lastTime = 0;
 
 Drawing.show = () => {
@@ -196,7 +242,6 @@ Drawing.show = () => {
     CANVAS_HEIGHT = 400;
 
     Drawing.canvas = new Canvas(CANVAS_WIDTH,CANVAS_HEIGHT);
-
     Drawing.Loop();
 }
 

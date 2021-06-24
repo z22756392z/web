@@ -1,17 +1,19 @@
 class Pen{
-    constructor(){
+    constructor(canvas){
+        this.canvas = canvas;
+
         this.isMouseDown = false;
         this.onMouseDown = (coord) =>{
             this.x = coord.x;
             this.y = coord.y;
             this.preX = this.x;
             this.preY = this.y;
-            this.type = "soild";
             if(this.shape == "Line" || this.shape == "Rectangle" || this.shape == "Circle"){
                 Drawing.dataURL = Drawing.Canvas.toDataURL();
             }
         };
         this.onMouseUp = (coord) =>{};
+
         this.x = null;
         this.y = null;
         this.preX = null;
@@ -19,7 +21,10 @@ class Pen{
         this.width = 5;
         this.height = 5;
         this.selected = true;
+        this.type = "soild"
         this.shape = "Pen"
+        this.color = "rgba(0,0,0,255)";
+
     }
 
     Down(coord){
@@ -35,12 +40,19 @@ class Pen{
         if(Drawing.canvas.objectType != null){
             this.type = Drawing.canvas.objectType;
         }
+        if(Drawing.canvas.objectColorR != null){
+            this.color = "rgba(" 
+            +     Drawing.canvas.objectColorR 
+            + ","+Drawing.canvas.objectColorG
+            + ","+Drawing.canvas.objectColorB
+            + ","+Drawing.canvas.objectColorA+")";
+        }
     }
 
     draw(ctx){
         if(this.isMouseDown){
             if(this.shape == "Pen"){
-                ctx.fillStyle='black';
+                ctx.strokeStyle = this.color;
                 ctx.beginPath();
                 ctx.lineWidth = this.width;
                 ctx.moveTo(this.preX,this.preY);
@@ -54,7 +66,7 @@ class Pen{
                 var image = new Image
                 image.src = Drawing.dataURL;
                 ctx.drawImage(image,0,0);
-                ctx.fillStyle='black';
+                ctx.strokeStyle= this.color;
                 ctx.beginPath();
                 ctx.lineWidth = this.width;
                 ctx.moveTo(this.preX,this.preY);
@@ -66,7 +78,8 @@ class Pen{
                 var image = new Image
                 image.src = Drawing.dataURL;
                 ctx.drawImage(image,0,0);
-                ctx.fillStyle='black';
+                ctx.fillStyle= this.color;
+                ctx.strokeStyle= this.color;
                 ctx.beginPath();
                 ctx.lineWidth = this.width;
                 ctx.moveTo(this.preX,this.preY);
@@ -83,7 +96,8 @@ class Pen{
                 var image = new Image
                 image.src = Drawing.dataURL;
                 ctx.drawImage(image,0,0);
-                ctx.fillStyle='black';
+                ctx.fillStyle= this.color;
+                ctx.strokeStyle= this.color;
                 ctx.beginPath();
                 ctx.arc(this.x,this.y,this.width,0,2* Math.PI);
                 if(this.type == "soild")    ctx.fill();

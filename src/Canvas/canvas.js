@@ -1,15 +1,16 @@
 class Canvas{
     constructor(canvasWidth, canvasHeight){
         
-        this.canvasWidth = canvasWidth;
-        this.gameHeight = canvasHeight;
+        this.width = canvasWidth;
+        this.height = canvasHeight;
         
-        this.pen = new Pen()
-        this.eraser = new Eraser();
-        this.select = new Select();
+        this.pen = new Pen(this)
+        this.eraser = new Eraser(this);
+        this.select = new Select(this);
+        this.bucket = new Bucket(this);
 
         this.Object = [];
-        this.Object = [this.pen, this.eraser,this.select];
+        this.Object = [this.pen, this.eraser,this.select,this.bucket];
 
         new Input(this.Object);
     }

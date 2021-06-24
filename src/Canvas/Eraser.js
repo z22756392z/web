@@ -1,11 +1,14 @@
 class Eraser{
-    constructor(){
+    constructor(canvas){
+        this.canvas = canvas;
+
         this.isMouseDown = false;
         this.onMouseDown = (coord) =>{
             this.x = coord.x;
             this.y = coord.y;
         }
         this.onMouseUp = (coord) =>{};
+        
         this.x = null;
         this.y = null;
         this.width = 10;
