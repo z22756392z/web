@@ -40,7 +40,11 @@ Drawing.onPenSelected = () =>{
 	Drawing.canvas.select.selected = false;
 	Drawing.canvas.eraser.selected = false;
 	Drawing.canvas.bucket.selected = false;
-	Drawing.settingPanelShow();
+	Drawing.SettingPanel_list1.style.display = "block";
+	Drawing.SettingPanel_list2.style.display = "block";
+	Drawing.SettingPanel_list3.style.display = "block";
+	Drawing.SettingPanel_list4.style.display = "none";
+	Drawing.SettingPanel_list5.style.display = "block";
 	Drawing.detailSettingPanel.innerHTML = ``;
 }
 Drawing.onBucketSelect = () =>{
@@ -49,7 +53,11 @@ Drawing.onBucketSelect = () =>{
 	Drawing.canvas.select.selected = false;
 	Drawing.canvas.eraser.selected = false;
 	Drawing.canvas.bucket.selected = true;
-	Drawing.settingPanelShow();
+	Drawing.SettingPanel_list1.style.display = "none";
+	Drawing.SettingPanel_list2.style.display = "block";
+	Drawing.SettingPanel_list3.style.display = "none";
+	Drawing.SettingPanel_list4.style.display = "block";
+	Drawing.SettingPanel_list5.style.display = "none";
 	Drawing.detailSettingPanel.innerHTML = ``;
 }
 Drawing.onEraserSelect = () =>{
@@ -58,7 +66,11 @@ Drawing.onEraserSelect = () =>{
 	Drawing.canvas.select.selected = false;
 	Drawing.canvas.bucket.selected = false;
 	Drawing.canvas.eraser.selected = true;
-	Drawing.settingPanelShow();
+	Drawing.SettingPanel_list1.style.display = "block";
+	Drawing.SettingPanel_list2.style.display = "none";
+	Drawing.SettingPanel_list3.style.display = "none";
+	Drawing.SettingPanel_list4.style.display = "none";
+	Drawing.SettingPanel_list5.style.display = "none";
 	Drawing.detailSettingPanel.innerHTML = ``;
 }
 Drawing.onSelectSelect = () =>{
@@ -68,23 +80,27 @@ Drawing.onSelectSelect = () =>{
 	Drawing.canvas.bucket.selected = false;
 	Drawing.canvas.select.selected = true;
 	Drawing.canvas.select.init();
-	Drawing.settingPanelShow();
+	Drawing.SettingPanel_list1.style.display = "none";
+	Drawing.SettingPanel_list2.style.display = "none";
+	Drawing.SettingPanel_list3.style.display = "none";
+	Drawing.SettingPanel_list4.style.display = "none";
+	Drawing.SettingPanel_list5.style.display = "none";
 	Drawing.detailSettingPanel.innerHTML = ``;
-	Drawing.settingPanel.innerHTML = ``;
 }
 
 
 
 Drawing.settingPanelHtml = `
-<div class = "panel-list">
+<div class = "panel-list" id = "panel-list1">
 <a href = javascript:Drawing.sizeSettingShow()>Size</a></div>
-<div class = "panel-list">
+<div class = "panel-list" id = "panel-list2">
 <a href = javascript:Drawing.colorSettingShow()>Color Picker</a></div>
-<div class = "panel-list">
+<div class = "panel-list" id = "panel-list3">
 <a href = javascript:Drawing.shapeSettingShow()>Shape</a></div>
-<div class ="canvas">
+<div class = "panel-list" id = "panel-list4">
+<a href = javascript:Drawing.aminationSettingShow()>Animation</a></div>
+<div class ="canvas" id = "panel-list5">
 <canvas width = "50" height = "50"></canvas></div>
-
 `
 Drawing.settingPanelShow = () =>{
 	Drawing.settingPanel.innerHTML = Drawing.settingPanelHtml;
@@ -220,6 +236,26 @@ Drawing.onSoildSelected = () =>{
 	Drawing.canvas.objectType = "soild"
 }
 
+Drawing.AnimationSettingHtml = `
+<div class = "Panel">
+<div class = "panel-list">
+<a href = javascript:Drawing.onAnimationOffSelected()>Off</a></div>
+<div class = "panel-list">
+<a href = javascript:Drawing.onAnimationOnSelected()>On</a></div>
+</div>
+`
+Drawing.aminationSettingShow = () =>{
+	Drawing.detailSettingPanel.innerHTML = Drawing.AnimationSettingHtml;
+}
+Drawing.onAnimationOnSelected = () =>{
+	Drawing.canvas.objectIsAnimation = true;
+}
+Drawing.onAnimationOffSelected = () =>{
+	Drawing.canvas.objectIsAnimation = false;
+}
+
+
+
 Drawing.lastTime = 0;
 
 Drawing.show = () => {
@@ -228,20 +264,25 @@ Drawing.show = () => {
 	Drawing.Panel = document.getElementById("Panel");
 	Drawing.Panel.innerHTML = Drawing.panelHtml;
 
-
+	Drawing.settingPanel = document.getElementById("setting-panel");
+	Drawing.settingPanelShow();
+	Drawing.detailSettingPanel = document.getElementById("detail-setting-panel");
+	Drawing.detailSettingPanel.innerHTML = ``;
+	Drawing.SettingPanel_list1 = document.getElementById("panel-list1");
+	Drawing.SettingPanel_list2 = document.getElementById("panel-list2");
+	Drawing.SettingPanel_list3 = document.getElementById("panel-list3");
+	Drawing.SettingPanel_list4 = document.getElementById("panel-list4");
+	Drawing.SettingPanel_list5 = document.getElementById("panel-list5");
+	
 
     Drawing.Canvas = document.getElementById("Canvas");
     Drawing.ctx = Drawing.Canvas.getContext("2d");
-
-
-	Drawing.settingPanel = document.getElementById("setting-panel");
-
-	Drawing.detailSettingPanel = document.getElementById("detail-setting-panel");
 
     CANVAS_WIDTH = 600;
     CANVAS_HEIGHT = 400;
 
     Drawing.canvas = new Canvas(CANVAS_WIDTH,CANVAS_HEIGHT);
+	Drawing.onPenSelected();
     Drawing.Loop();
 }
 

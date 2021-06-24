@@ -46,7 +46,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
  }
 
-stack_fill = async(imgData, loc, old_val, new_val,canvas_size) =>{
+Ainmate_stack_fill = async(imgData, loc, old_val, new_val,canvas_size) =>{
     if (imgData.data[(loc[0] - -loc[1] * canvas_size[0]) * 4] == new_val.r &&
     imgData.data[(loc[0] - -loc[1] * canvas_size[0]) * 4 - -1] == new_val.g &&
     imgData.data[(loc[0] - -loc[1] * canvas_size[0]) * 4 - -2] == new_val.b &&
@@ -78,7 +78,7 @@ stack_fill = async(imgData, loc, old_val, new_val,canvas_size) =>{
             possible_neighbors = find_neighbors(imgData, current_loc,old_val, new_val)
             
             Drawing.Canvas.getContext("2d").putImageData(imgData, 0, 0);
-            await sleep(0.0001);
+            await sleep(1);
 
             for(let i = 0 ; i < possible_neighbors.length ; i++){
                 s.push(possible_neighbors[i]);
@@ -86,6 +86,47 @@ stack_fill = async(imgData, loc, old_val, new_val,canvas_size) =>{
         }  
     }
 }
+
+stack_fill = (imgData, loc, old_val, new_val,canvas_size) =>{
+    if (imgData.data[(loc[0] - -loc[1] * canvas_size[0]) * 4] == new_val.r &&
+    imgData.data[(loc[0] - -loc[1] * canvas_size[0]) * 4 - -1] == new_val.g &&
+    imgData.data[(loc[0] - -loc[1] * canvas_size[0]) * 4 - -2] == new_val.b &&
+    imgData.data[(loc[0] - -loc[1] * canvas_size[0]) * 4 - -3] == new_val.a)
+    return
+    
+
+    let s = []
+    s.push(loc);
+
+    while (s.length > 0){
+        current_loc = s.pop();
+
+        if (imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4] == new_val.r &&
+            imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4 - -1] == new_val.g &&
+            imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4 - -2] == new_val.b &&
+            imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4 - -3] == new_val.a)
+                continue;
+        if (imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4] == old_val.r &&
+        imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4 - -1] == old_val.g &&
+        imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4 - -2] == old_val.b &&
+        imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4 - -3] == old_val.a){
+            
+            imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4] = new_val.r ;
+            imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4 - -1] = new_val.g ;
+            imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4 - -2] = new_val.b;
+            imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4 - -3] = new_val.a;
+
+            possible_neighbors = find_neighbors(imgData, current_loc,old_val, new_val)
+            
+            Drawing.Canvas.getContext("2d").putImageData(imgData, 0, 0);
+
+            for(let i = 0 ; i < possible_neighbors.length ; i++){
+                s.push(possible_neighbors[i]);
+            }
+        }  
+    }
+}
+
 
 /*  Reach maximum call stack size
 recursive_fill = (canvas, loc, old_val, new_val,canvas_size) =>{

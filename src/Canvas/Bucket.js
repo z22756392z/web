@@ -5,6 +5,7 @@ class Bucket{
         this.isMouseDown = false;
 
         this.imgData = null;
+        this.isAimate = false;
         this.x = null;
         this.y = null;
         this.color ={
@@ -40,7 +41,13 @@ class Bucket{
         canvas_size[0] = this.canvas.width;
         canvas_size[1] = this.canvas.height;
         
-        stack_fill(this.imgData, loc, old_val, this.color,canvas_size);       
+        if(this.isAimate)
+            Ainmate_stack_fill(this.imgData, loc, old_val, this.color,canvas_size);
+        else{
+            alert("please wait! this would take quite a while")
+            stack_fill(this.imgData, loc, old_val, this.color,canvas_size);
+        }
+            
     }
 
     onMouseUp(){
@@ -56,6 +63,9 @@ class Bucket{
             this.color.g = Drawing.canvas.objectColorG;
             this.color.b = Drawing.canvas.objectColorB;
             this.color.a = Drawing.canvas.objectColorA;
+        }
+        if(Drawing.canvas.objectIsAnimation != null){
+            this.isAimate = Drawing.canvas.objectIsAnimation;
         }
     }
 
