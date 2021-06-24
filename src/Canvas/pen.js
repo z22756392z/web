@@ -100,6 +100,7 @@ class Pen{
                 ctx.strokeStyle= this.color;
                 ctx.beginPath();
                 ctx.arc(this.x,this.y,this.width,0,2* Math.PI);
+                ctx.colsePath();
                 if(this.type == "soild")    ctx.fill();
                 else    ctx.stroke();
             }

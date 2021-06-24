@@ -57,7 +57,7 @@ Ainmate_stack_fill = async(imgData, loc, old_val, new_val,canvas_size) =>{
     let s = []
     s.push(loc);
 
-    while (s.length > 0){
+    while (s.length > 0 && Drawing.canvas.bucket.isAimate){
         current_loc = s.pop();
 
         if (imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4] == new_val.r &&

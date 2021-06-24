@@ -2,6 +2,7 @@ class Player {
   constructor(game) {
     this.game = game;
     this.image = document.getElementById("img_knight");
+    //this.image.crossOrigin = '';
     this.gameWidth = game.gameWidth;
     this.gameHeight = game.gameHeight;
 

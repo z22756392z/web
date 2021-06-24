@@ -40,6 +40,7 @@ Drawing.onPenSelected = () =>{
 	Drawing.canvas.select.selected = false;
 	Drawing.canvas.eraser.selected = false;
 	Drawing.canvas.bucket.selected = false;
+	Drawing.canvas.bucket.isAimate = false;
 	Drawing.SettingPanel_list1.style.display = "block";
 	Drawing.SettingPanel_list2.style.display = "block";
 	Drawing.SettingPanel_list3.style.display = "block";
@@ -53,6 +54,7 @@ Drawing.onBucketSelect = () =>{
 	Drawing.canvas.select.selected = false;
 	Drawing.canvas.eraser.selected = false;
 	Drawing.canvas.bucket.selected = true;
+	Drawing.canvas.bucket.isAimate = false;
 	Drawing.SettingPanel_list1.style.display = "none";
 	Drawing.SettingPanel_list2.style.display = "block";
 	Drawing.SettingPanel_list3.style.display = "none";
@@ -66,6 +68,7 @@ Drawing.onEraserSelect = () =>{
 	Drawing.canvas.select.selected = false;
 	Drawing.canvas.bucket.selected = false;
 	Drawing.canvas.eraser.selected = true;
+	Drawing.canvas.bucket.isAimate = false;
 	Drawing.SettingPanel_list1.style.display = "block";
 	Drawing.SettingPanel_list2.style.display = "none";
 	Drawing.SettingPanel_list3.style.display = "none";
@@ -79,6 +82,7 @@ Drawing.onSelectSelect = () =>{
 	Drawing.canvas.eraser.selected = false;
 	Drawing.canvas.bucket.selected = false;
 	Drawing.canvas.select.selected = true;
+	Drawing.canvas.bucket.isAimate = false;
 	Drawing.canvas.select.init();
 	Drawing.SettingPanel_list1.style.display = "none";
 	Drawing.SettingPanel_list2.style.display = "none";

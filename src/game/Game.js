@@ -88,6 +88,7 @@ class Game {
         this.gameHeight / 2
       );
     } else {
+      
       this.gameObject.forEach((Object) => Object.draw(ctx));
 
       for (let i = 0; i < this.lives; i++) {
