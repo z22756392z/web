@@ -117,8 +117,6 @@ stack_fill = (imgData, loc, old_val, new_val,canvas_size) =>{
             imgData.data[(current_loc[0] - -current_loc[1] * canvas_size[0]) * 4 - -3] = new_val.a;
 
             possible_neighbors = find_neighbors(imgData, current_loc,old_val, new_val)
-            
-            Drawing.Canvas.getContext("2d").putImageData(imgData, 0, 0);
 
             for(let i = 0 ; i < possible_neighbors.length ; i++){
                 s.push(possible_neighbors[i]);
