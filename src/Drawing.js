@@ -182,6 +182,7 @@ Drawing.colorInputOnChange = () =>{
 	Drawing.canvas.objectColorB = Drawing.bSlider.value;
 	Drawing.canvas.objectColorA = Drawing.aSlider.value;
 	Drawing.DisplayerCtx.clearRect(0, 0, 50, 50);
+	if(Drawing.canvas.objectWidth == null) {Drawing.canvas.objectWidth = 5; Drawing.canvas.objectHeight = 5;}
 	Drawing.DisplayerCtx.fillStyle = "rgba(" + Drawing.canvas.objectColorR +","+Drawing.canvas.objectColorG+ ","+Drawing.canvas.objectColorB + ","+Drawing.canvas.objectColorA +")";
 	Drawing.DisplayerCtx.fillRect(0,35-Drawing.canvas.objectWidth/2 ,Drawing.canvas.objectWidth,Drawing.canvas.objectHeight);
 	Drawing.DisplayerCtx.fill();

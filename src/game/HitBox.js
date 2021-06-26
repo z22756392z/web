@@ -1,6 +1,7 @@
 class HitBox {
   constructor(player) {
-    this.image = document.getElementById("img_shield");
+    this.image = new Image();
+    this.image.src = 'src/game/assets/images/shield[1].png';
 
     this.direction = {
       up: false,

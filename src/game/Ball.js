@@ -4,7 +4,8 @@ class Ball {
     this.gameHeight = game.gameHeight;
     this.game = game;
 
-    this.image = document.getElementById("img_ball");
+    this.image = new Image();
+    this.image.src = 'src/game/assets/images/ball.png';
 
     this.markForDel = false;
 

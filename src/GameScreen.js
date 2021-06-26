@@ -18,11 +18,6 @@ GameScreen.html = `
 	"
 	id = "gameScreen" 
 	width="800" height="600"></canvas>
-
-    <img id = "img_ball" src = "src/game/assets/images/ball.png" style = "display: none"></img>
-	<img id = "img_heart" src = "src/game/assets/images/heart.png" style = "display: none" </img>
-    <img id = "img_shield" src = "src/game/assets/images/shield[1].png" style = "display: none"></img>
-    <img id = "img_knight" src = "src/game/assets/images/knight.png" style = "display: none"></img>
     <p>use capital W,A,S,D to move and use J to defense yourself</p>
 `
 GameScreen.lastTime = 0;
