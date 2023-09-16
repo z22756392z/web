@@ -5,7 +5,7 @@ const Fetch = async (/*resource*/) => {//known as an asynchronous function and w
                                  //been found then it is throwing some kind of error with response.json and it is rejecting this promise. 
                                  //So to combat this, we have to manually check if the response object have a status of 200
   
-    throw new Error('cannot fetch the data'); //when we throw an error inside an async function the Promise return by Fetch async function is rejected 
+    //throw new Error('cannot fetch the data'); //when we throw an error inside an async function the Promise return by Fetch async function is rejected 
                                               //and therefore if it's rejected  we gonna catch it by catch method. 
     }
     const data  = response.json();
