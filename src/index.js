@@ -14,7 +14,7 @@ function init(){
             navbar.show();
             Home.show();
         }).catch(err => {//failed
-            error.fatalError(err);
+            //error.fatalError(err);
     })},1000);
     
     isLoading.show();
