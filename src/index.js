@@ -13,9 +13,10 @@ function init(){
             commentData = newData.comment;
             navbar.show();
             Home.show();
-        }).catch(err => {//failed
+        })//.catch(err => {//failed
             //error.fatalError(err);
-    })},1000);
+    //})
+    },1000);
     
     isLoading.show();
 }
