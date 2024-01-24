@@ -16,9 +16,9 @@ commentDetail.html = `
 
 
 commentDetail.show = () => {
-    main.innerHTML = commentDetail.html;
+  main.innerHTML = commentDetail.html;
 
-    if ('content' in document.createElement('template')) {
+  if ('content' in document.createElement('template')) {
     const container = document.getElementById("container");
     const template = document.getElementById("template");
 
@@ -35,7 +35,7 @@ commentDetail.show = () => {
         container.appendChild(clone[i]);
         
     }
-}else{
+  }else{
     console.log("failed to use template element");
   }
 }
